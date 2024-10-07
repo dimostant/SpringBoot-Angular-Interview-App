@@ -1,14 +1,20 @@
 package com.eu.app.rest.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-//import lombok.Data;
+import jakarta.persistence.*;
+import lombok.Data;
 
-//@Data
+@Data
 @Entity
 @Table(name = "customer")
 
 public class Customer {
-    private int test;
-}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
+    private String name;
+
+    private String email;
+
+    private String phone;
+}
