@@ -1,7 +1,10 @@
 package com.eu.app.rest.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.sql.Date;
 
 @Data
 @Entity
@@ -18,7 +21,8 @@ public class User {
 
     private String gender;
 
-    private String birthDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+    private Date birthDate; //change to date
 
     private String workAddress;
 
