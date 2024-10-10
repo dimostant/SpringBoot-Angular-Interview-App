@@ -2,7 +2,7 @@
   <div class="col-8">
     <div class="card">
       <div class="card-header bg-success">
-        <h1> Users :</h1>
+        <h1> Users </h1>
       </div>
       <div class="card-body">
         <div class="row">
@@ -19,7 +19,20 @@
                 </tr>
               </thead>
               <tbody>
-                
+                @for(user of $users | async; track user.id) {
+                  <tr>
+                    <td> {{user.name}}</td>
+                    <td> {{user.surname}}</td>
+                    <td> {{user.gender}}</td>
+                    <td> {{user.birthDate}}</td>
+                    <td> {{user.workAddress}}</td>
+                    <td> {{user.homeAddress}}</td>
+                  </tr>
+                } @empty {
+                  <tr>
+                    <td>No users found</td>
+                  </tr>
+                }
               </tbody>
             </table>
           </div>
@@ -33,54 +46,43 @@
         Register
       </div>
       <div class="card-body">
-        <div class="row">
-          <div class="col-6">
-            <label for="">Name</label>
-            <input type="text" class="form-control">
+        <form [formGroup]="userForm">
+          <div class="row">
+            <div class="col-6">
+              <label for="">Name</label>
+              <input type="text" formControlName="name" class="form-control">
+            </div>
+            <div class="col-6">
+              <label for="">Surname</label>
+              <input type="text" formControlName="surname" class="form-control">
+            </div>
+            <div class="col-6">
+              <label for="">Gender</label>
+              <input type="text" formControlName="gender" class="form-control">
+            </div>
+            <div class="col-6">
+              <label for="">Date</label>
+              <input type="text" formControlName="birthDate" class="form-control"/>
+            </div>
+            <div class="col-12">
+              <label for="">Work Address</label>
+              <textarea formControlName="workAddress" class="form-control"></textarea>
+            </div>
+            <div class="col-12">
+              <label for="">Home Address</label>
+              <textarea formControlName="homeAddress" class="form-control"></textarea>
+            </div>
           </div>
-          <div class="col-6">
-            <label for="">Surname</label>
-            <input type="text" class="form-control">
+          <div class="row  pt-2">
+            <div class="col-6 text-center">
+              <button class="btn btn-secondary">Reset</button>
+            </div>
+            <div class="col-6 text-center">
+              <button class="btn btn-success" (click)="onSave()">Register</button>
+            </div>
           </div>
-          <div class="col-6">
-            <label for="">Gender</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="col-6">
-            <label for="">Date</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="col-12">
-            <label for="">Work Address</label>
-            <textarea class="form-control"></textarea>
-          </div>
-          <div class="col-12">
-            <label for="">Home Address</label>
-            <textarea class="form-control"></textarea>
-          </div>
-        </div>
-      </div>
-      <div class="row pt-2">
-        <div class="col-6 text-center">
-          <button class="btn btn-secondary">Reset</button>
-        </div>
-        <div class="col-6 text-center">
-          <button class="btn btn-success">Register</button>
-        </div>
+        </form>
       </div>
     </div>
   </div>
 </div>
-
-
-  
-  @for(user of $users | async; track user.id) {
-    <h2>{{user.name}}</h2>
-    <p> {{user.surname}}</p>
-    <p> {{user.gender}}</p>
-    <p> {{user.birthDate}}</p>
-    <p> {{user.workAddress}}</p>
-    <p> {{user.homeAddress}}</p>
-  } @empty {
-    <p>No users found</p>
-  }
