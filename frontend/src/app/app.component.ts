@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 
 import { CommonModule } from '@angular/common';
 import { UserService } from './user.service';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { User } from './user';
 
 @Component({
@@ -16,21 +16,13 @@ import { User } from './user';
 export class AppComponent {
   title = 'EDfrontend';
   
-  postService = inject(UserService);
-  $users = this.postService.getUsers();
+  // postService = inject(UserService);
+  // $users = this.postService.getUsers();
 
 
   userForm: FormGroup = new FormGroup({});
   
-  userObj: User = new User(
-    null,
-    '',
-    '',
-    '',
-    new Date(),
-    '',
-    ''
-  );
+  userObj: User = new User( null, '', '', '', new Date(), '', '');
   userList: User[] = [];
 
   constructor() {
@@ -44,27 +36,14 @@ export class AppComponent {
     }
   }
 
-  // ngOnInit(): void {}
-
-  isLocalStorageAvailable(): boolean {
-    try {
-      const testKey = 'test';
-      localStorage.setItem(testKey, 'testValue');
-      localStorage.removeItem(testKey);
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
   createForm() {
     this.userForm = new FormGroup({
       id:           new FormControl(this.userObj.id),
-      name:         new FormControl(this.userObj.name),
-      surname:      new FormControl(this.userObj.surname),
+      name:         new FormControl(this.userObj.name, [Validators.required]),
+      surname:      new FormControl(this.userObj.surname,[Validators.required]),
       gender:       new FormControl(this.userObj.gender),
-      birthDate:    new FormControl(this.userObj.birthDate),
-      workAddress:  new FormControl(this.userObj.workAddress),
+      birthDate:    new FormControl(this.userObj.birthDate,[Validators.required]),
+      workAddress:  new FormControl(this.userObj.workAddress,[Validators.required]),
       homeAddress:  new FormControl(this.userObj.homeAddress)
     });
   }
@@ -79,10 +58,11 @@ export class AppComponent {
       this.userList.unshift(this.userForm.value);
     }
     localStorage.setItem('userData', JSON.stringify(this.userList));
+    this.onReset();
   }
 
   onEdit(user: User) {
-    // this.userForm = user;
+    this.userObj = user;
     this.createForm();
   }
   
@@ -94,16 +74,32 @@ export class AppComponent {
       //other fields
     }
     localStorage.setItem('userData', JSON.stringify(this.userList));
-    // this.userForm = new User();
+    this.userObj = new User( null, '', '', '', new Date(), '', '');
     this.createForm();
   }
 
-  onDelete(user: User){ //id: number) {
-    // const isDelete = confirm('Are you sure you want to delete?');
-    // if (isDelete) {
-    //   const index = this.userList.findIndex((x) => x.id == id);
-    //   this.userList.splice(index,1)
-    //   localStorage.setItem('userData', JSON.stringify(this.userList));
-    // }
+  onDelete(id: number | null) {
+    const isDelete = confirm('Are you sure you want to delete?');
+    if (isDelete) {
+      const index = this.userList.findIndex((x) => x.id == id);
+      this.userList.splice(index,1)
+      localStorage.setItem('userData', JSON.stringify(this.userList));
+    }
+  }
+
+  onReset() {
+    this.userObj = new User( null, '', '', '', new Date(), '', '');
+    this.createForm();
+  }
+
+  isLocalStorageAvailable(): boolean {
+    try {
+      const testKey = 'test';
+      localStorage.setItem(testKey, 'testValue');
+      localStorage.removeItem(testKey);
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 }
