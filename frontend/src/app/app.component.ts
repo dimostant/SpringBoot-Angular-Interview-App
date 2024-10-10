@@ -81,11 +81,11 @@ export class AppComponent {
     localStorage.setItem('userData', JSON.stringify(this.userList));
   }
 
-  onEdit() {
-    
+  onEdit(user: User) {
+
   }
   
-  onDelete() {
+  onDelete(user: User) {
 
   }
 }

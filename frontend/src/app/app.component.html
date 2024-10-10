@@ -30,7 +30,7 @@
                     <td> {{user.homeAddress}}</td>
                     <td class="text-center">
                       <button class="btn btn-primary" (click)="onEdit(user)">Edit</button>
-                      <button class="btn btn-danger mx-2">Delete </button>
+                      <button class="btn btn-danger mx-2" (click)="onDelete(user)">Delete </button>
                     </td>
                   </tr>
                 } @empty {
