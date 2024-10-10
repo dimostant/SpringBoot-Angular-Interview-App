@@ -82,10 +82,28 @@ export class AppComponent {
   }
 
   onEdit(user: User) {
-
+    // this.userForm = user;
+    this.createForm();
   }
   
-  onDelete(user: User) {
+  onUpdate() {
+    const record = this.userList.find((x) => x.id == this.userForm.controls['id'].value);
+    if (record != undefined) {
+      record.name = this.userForm.controls['name'].value;
+      record.surname = this.userForm.controls['surname'].value;
+      //other fields
+    }
+    localStorage.setItem('userData', JSON.stringify(this.userList));
+    // this.userForm = new User();
+    this.createForm();
+  }
 
+  onDelete(user: User){ //id: number) {
+    // const isDelete = confirm('Are you sure you want to delete?');
+    // if (isDelete) {
+    //   const index = this.userList.findIndex((x) => x.id == id);
+    //   this.userList.splice(index,1)
+    //   localStorage.setItem('userData', JSON.stringify(this.userList));
+    // }
   }
 }
