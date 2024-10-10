@@ -80,4 +80,12 @@ export class AppComponent {
     }
     localStorage.setItem('userData', JSON.stringify(this.userList));
   }
+
+  onEdit() {
+    
+  }
+  
+  onDelete() {
+
+  }
 }
