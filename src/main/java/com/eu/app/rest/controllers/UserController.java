@@ -11,11 +11,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
     private final UserService userService;
 
-    @PostMapping("/user")
+    @PostMapping("/users")
     public User postUser(@RequestBody User user) {
         return userService.postUser(user);
     }
@@ -25,7 +25,7 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/users/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
         User user = userService.getUserById(id);
         if (user == null) {
@@ -34,7 +34,7 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @PutMapping("/user/{id}")
+    @PutMapping("/users/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user){
         User existingUser = userService.getUserById(id);
         if (existingUser == null) {
@@ -50,7 +50,7 @@ public class UserController {
         return ResponseEntity.ok(updatedUser);
     }
 
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("/users/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {
         User existingUser = userService.getUserById(id);
         if (existingUser == null) {

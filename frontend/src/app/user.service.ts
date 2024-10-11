@@ -10,12 +10,12 @@ export class UserService {
 
   constructor() { }
 
-  private apiUrl = 'http://localhost:8080/api/user';
+  private apiUrl = 'http://localhost:8080/api/users';
 
   http = inject(HttpClient);
 
-  getUsers() {
-    return this.http.get<User[]>(`${this.apiUrl}s`);
+  getUsers()  {
+    return this.http.get<User[]>(`${this.apiUrl}`);
   }
 
   getUser(id: number) {
@@ -31,6 +31,7 @@ export class UserService {
   }
 
   deleteUser(id: number) {
+    console.log(`${this.apiUrl}/${id}`)
     return this.http.delete<User>(`${this.apiUrl}/${id}`);
   }
 
