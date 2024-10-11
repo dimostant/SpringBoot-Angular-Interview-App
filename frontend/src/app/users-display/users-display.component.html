@@ -20,8 +20,8 @@
               </tr>
             </thead>
             <tbody>
-              <!-- @for(user of $users | async; track user.id) { -->
-               <!-- @for (user of userList; track $index) {
+              @for(user of $users | async; track user.id) { 
+               <!-- @for (user of userList; track $index) {  -->
                 <tr>
                   <td> {{user.name}}</td>
                   <td> {{user.surname}}</td>
@@ -30,15 +30,15 @@
                   <td> {{user.workAddress}}</td>
                   <td> {{user.homeAddress}}</td>
                   <td class="text-center">
-                    <button class="btn btn-primary" (click)="onEdit(user)">Edit</button>
-                    <button class="btn btn-danger mx-2" (click)="onDelete(user.id)">Delete </button>
+                    <button class="btn btn-primary" (click)="onEdit()">Edit</button>
+                    <button class="btn btn-danger mx-2" (click)="onDelete()">Delete </button>
                   </td>
                 </tr>
               } @empty {
                 <tr>
                   <td>No users found</td>
                 </tr>
-              }  -->
+              } 
             </tbody>
           </table>
         </div>

@@ -1,8 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
-import { CommonModule } from '@angular/common';
-import { UserService } from './user.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { User } from './user';
 
@@ -10,7 +8,6 @@ import { User } from './user';
   selector: 'app-root',
   standalone: true,
   imports: [
-    CommonModule, //common module?
     RouterOutlet, 
     RouterLink, 
     RouterLinkActive, 
@@ -20,15 +17,10 @@ import { User } from './user';
 })
 export class AppComponent {
   title = 'EDfrontend';
-  
-  // postService = inject(UserService);
-  // $users = this.postService.getUsers();
 
-
-  userForm: FormGroup = new FormGroup({});
-  
   userObj: User = new User( null, '', '', '', new Date(), '', '');
   userList: User[] = [];
+  userForm: FormGroup = new FormGroup({});  
 
   constructor() {
     this.createForm();
