@@ -1,7 +1,14 @@
 import { Injectable, inject } from '@angular/core';
 
 import { User } from './user';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, throwError } from 'rxjs';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 
+    'Content-Type': 'application/json'
+   })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +22,7 @@ export class UserService {
   http = inject(HttpClient);
 
   getUsers()  {
-    return this.http.get<User[]>(`${this.apiUrl}`);
+    return this.http.get<User[]>(this.apiUrl).pipe(catchError((this.handleError)));
   }
 
   getUser(id: number) {
@@ -23,7 +30,7 @@ export class UserService {
   }
 
   createUser(user: User) {
-    return this.http.post<User>(this.apiUrl, user);
+    return this.http.post<User>(this.apiUrl, user, httpOptions);
   }
 
   updateUser(user: User) {
@@ -35,4 +42,8 @@ export class UserService {
     return this.http.delete<User>(`${this.apiUrl}/${id}`);
   }
 
+  private handleError (error: any) {
+    console.log('server error:', error);
+    return throwError(() => new Error('server error'));
+  };
 }
