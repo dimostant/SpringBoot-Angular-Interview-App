@@ -1,4 +1,4 @@
-<div class="row">
+<!-- <div class="row">
   <div class="col-8">
     <div class="card">
       <div class="card-header bg-success">
@@ -19,9 +19,9 @@
                   <th class="text-center">Controls</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody> -->
                 <!-- @for(user of $users | async; track user.id) { -->
-                 @for (user of userList; track $index) {
+                 <!-- @for (user of userList; track $index) {
                   <tr>
                     <td> {{user.name}}</td>
                     <td> {{user.surname}}</td>
@@ -59,9 +59,9 @@
               <input type="text" formControlName="name" class="form-control">
               <div class="text-danger">
                 @if(userForm.controls['name'].touched && userForm.controls['name'].errors?.['required']) {
-                  <small class="text-danger">Name is required</small>
+                  <small class="text-danger">Name is required</small> -->
                   <!-- <span></span> -->
-                }
+                <!-- }
               </div>
             </div>
             <div class="col-6">
@@ -116,4 +116,14 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
+
+<h1>Router</h1>
+<nav>
+  <ul>
+    <li><a routerLink="/userForm" routerLinkActive="active" ariaCurrentWhenActive="page">First Component</a></li>
+    <li><a routerLink="/usersDisplay" routerLinkActive="active" ariaCurrentWhenActive="page">Second Component</a></li>
+  </ul>
+</nav>
+<!-- The routed views render in the <router-outlet>-->
+<router-outlet></router-outlet>

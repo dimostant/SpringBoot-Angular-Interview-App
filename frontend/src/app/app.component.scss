@@ -1,3 +1,35 @@
-.form-control {
-    border: 1px solid gray;
-}
+// .form-control {
+//     border: 1px solid gray;
+// }
+
+/* Add this in your styles.css or app.component.scss */
+.form-label {
+    font-weight: bold;
+  }
+  
+  .form-control {
+    border-radius: 0.25rem;
+  }
+  
+  .btn {
+    border-radius: 0.25rem;
+  }
+  
+  .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+  }
+  
+  .btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+  }
+  
+  .shadow-sm {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  }
