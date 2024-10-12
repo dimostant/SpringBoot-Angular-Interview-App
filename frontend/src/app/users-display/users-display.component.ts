@@ -1,8 +1,8 @@
 import { Component, inject  } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
-import { UserService } from '../user.service';
 import { User } from '../user';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-users-display',
@@ -15,7 +15,7 @@ import { User } from '../user';
 })
 export class UsersDisplayComponent {
   postService = inject(UserService);
-  
+
   users: User[] = [];
 
   constructor() {
@@ -35,7 +35,14 @@ export class UsersDisplayComponent {
 
   onDelete(id: number | null) {
     if (id != null) {
-      this.postService.deleteUser(id);
+      this.postService.deleteUser(id).subscribe({
+        next: (data) => {
+          console.log(data);
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      });
     }
   }
 }
