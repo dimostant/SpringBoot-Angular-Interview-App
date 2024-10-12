@@ -3,8 +3,10 @@ import { Component, inject  } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { User } from '../user';
 import { UserService } from '../user.service';
+import { ActivatedRoute } from '@angular/router';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-user-form',
@@ -22,11 +24,31 @@ export class UserFormComponent {
   userForm: FormGroup = new FormGroup({});  
   
   postService = inject(UserService);
-  
   http = inject(HttpClient);
 
-  constructor() {
+  constructor(private route: ActivatedRoute) {
     this.createForm();
+    
+    this.route.queryParams.subscribe(params => {
+      console.log(params);
+      if (params['id'] != undefined) {
+        const id = params['id'];
+        this.postService.getUser(id)
+        .subscribe({
+          next: (data) => {
+            if(data) {
+              this.userObj = data;
+              this.createForm();
+            }
+          }, 
+          error: (error) => {
+              console.log(error);
+          }
+        });
+      } else {
+        this.onReset();
+      }
+    });
   }
 
   createForm() {
@@ -42,8 +64,7 @@ export class UserFormComponent {
   }
   
   onSave() {
-    const user = new User( null, 'mastoraaaas', 'giorgou', 'jynaika', new Date(), 'asdfas', 'fdsaf');
-    this.postService.createUser(user)
+    this.postService.createUser(this.userObj)
     .subscribe((res: any) => {
       if(res.result) {
         this.onReset();
@@ -52,29 +73,17 @@ export class UserFormComponent {
         alert(res.message);
       }
     });
-    // const oldData = localStorage.getItem('userData');
-    // if (oldData != null) {
-    //   const parseData = JSON.parse(oldData);
-    //   this.userForm.controls['id'].setValue(parseData.length + 1);
-    //   this.userList.unshift(this.userForm.value);
-    // } else {
-    //   this.userList.unshift(this.userForm.value);
-    // }
-    // localStorage.setItem('userData', JSON.stringify(this.userList));
-    // this.onReset();
-  }
-
-  onEdit(user: User) {
-    this.userObj = user;
-    this.createForm();
   }
   
   onUpdate() {
     const record = this.userList.find((x) => x.id == this.userForm.controls['id'].value);
     if (record != undefined) {
-      record.name = this.userForm.controls['name'].value;
-      record.surname = this.userForm.controls['surname'].value;
-      //other fields
+      record.name        = this.userForm.controls['name'].value;
+      record.surname     = this.userForm.controls['surname'].value;
+      record.gender      = this.userForm.controls['gender'].value;
+      record.birthDate   = this.userForm.controls['birthDate'].value;
+      record.workAddress = this.userForm.controls['workAddress'].value;
+      record.homeAddress = this.userForm.controls['homeAddress'].value;
     }
     localStorage.setItem('userData', JSON.stringify(this.userList));
     this.onReset();

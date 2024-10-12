@@ -3,6 +3,9 @@ import { Component, inject  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { User } from '../user';
 import { UserService } from '../user.service';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-users-display',
@@ -15,22 +18,16 @@ import { UserService } from '../user.service';
 })
 export class UsersDisplayComponent {
   postService = inject(UserService);
+  router = inject(Router);
 
   users: User[] = [];
 
   constructor() {
-    this.postService.getUsers().subscribe({
-      next: (data) => {
-        this.users = data;
-      },
-      error: (error) => {
-        console.log(error);
-      }
-    });
+    this.setArray();
   }
 
-  onEdit() {
-
+  onEdit(id: number | null) {
+    this.router.navigate(['UserForm'], { queryParams: { id: id } });
   }
 
   onDelete(id: number | null) {
@@ -43,6 +40,18 @@ export class UsersDisplayComponent {
           console.log(error);
         }
       });
+      this.setArray(); //reset 
     }
+  }
+
+  setArray(){
+    this.postService.getUsers().subscribe({
+      next: (data) => {
+        this.users = data;
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
   }
 }
