@@ -21,6 +21,11 @@ export class UsersDisplayComponent {
 
   users: User[] = [];
 
+  currentPage: number = 0;
+  pageSize: number = 5;
+  totalElements: number = 0;
+  totalPages: number = 0; 
+
   constructor() {
     this.setArray();
   }
@@ -49,14 +54,21 @@ export class UsersDisplayComponent {
   }
 
   setArray(){
-    this.userService.getUsers(0, 5).subscribe({
+    this.userService.getUsers(this.currentPage, this.pageSize).subscribe({
       next: (data) => {
         this.users = data.content;
+        this.totalElements = data.totalElements;
+        this.totalPages = data.totalPages;
       },
       error: (error) => {
         console.log(error);
       }
     });
+  }
+
+  onPageChange(page: number): void {
+    this.currentPage = page;
+    this.setArray();
   }
 
   reloadPage() {
