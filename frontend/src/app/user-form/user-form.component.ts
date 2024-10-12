@@ -22,19 +22,20 @@ export class UserFormComponent {
   postService = inject(UserService);
   router = inject(Router);
 
-  userObj: User = new User( null, '', '', '', '', '', '');
+  userObj: User = new User( null, '', '', 'M', '', '', '');
   userList: User[] = [];
   userForm: FormGroup = new FormGroup({});  
 
-  maxdate = new Date().toISOString().split('T')[0];
+  isEdit = false;
+  maxDate = new Date().toISOString().split('T')[0];
   dropdownOptions = ['M', 'F'];
 
   constructor(private route: ActivatedRoute) {
     this.createForm();
-    
     this.route.queryParams.subscribe(params => {
       if (params['id'] != undefined && params['id'] != null && params['id'] !== '') {
         const id = params['id'];
+        this.isEdit = true;
         this.postService.getUser(id)
         .subscribe({
           next: (data) => {
@@ -55,12 +56,11 @@ export class UserFormComponent {
 
   createForm() {
     this.userForm = new FormGroup({
-      id:           new FormControl(this.userObj.id),
-      name:         new FormControl(this.userObj.name),//, [Validators.required]),
-      surname:      new FormControl(this.userObj.surname),//, [Validators.required]),
-      gender:       new FormControl(this.userObj.gender),
-      birthDate:    new FormControl(this.userObj.birthDate),//, [Validators.required]),
-      workAddress:  new FormControl(this.userObj.workAddress), //, [Validators.required]),
+      name:         new FormControl(this.userObj.name,         [Validators.required]),
+      surname:      new FormControl(this.userObj.surname,      [Validators.required]),
+      gender:       new FormControl(this.userObj.gender,       [Validators.required]),
+      birthDate:    new FormControl(this.userObj.birthDate,    [Validators.required]),
+      workAddress:  new FormControl(this.userObj.workAddress),
       homeAddress:  new FormControl(this.userObj.homeAddress)
     });
   }
@@ -95,9 +95,7 @@ export class UserFormComponent {
   }
 
   onReset() {
-    //this.userObj = new User( null, '', '', '', new Date(), '', '');
-    this.userObj  = new User( null, '', '', '', '', '', '');
-
+    this.userObj  = new User( null, '', '', 'M', '', '', '');
     this.createForm();
   }
 
