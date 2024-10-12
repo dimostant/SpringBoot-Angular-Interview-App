@@ -22,7 +22,7 @@ public class User {
     private String gender;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
-    private Date birthDate; //change to date
+    private Date birthDate;
 
     private String workAddress;
 

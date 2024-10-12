@@ -1,11 +1,11 @@
 import { Component, inject  } from '@angular/core';
 
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { User } from '../user';
-import { UserService } from '../user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
+import { User } from '../user';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-user-form',
@@ -80,7 +80,6 @@ export class UserFormComponent {
     });
     this.onReset();
     alert("User added successfully");
-    this.router.navigate(['UsersDisplay']);
   }
 
   onReset() {

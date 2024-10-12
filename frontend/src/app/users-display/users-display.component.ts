@@ -41,7 +41,7 @@ export class UsersDisplayComponent {
     }
     alert("User deleted successfully");
     this.setArray();
-    window.location.reload()
+    this.reloadPage();
   }
 
   setArray(){
@@ -53,5 +53,9 @@ export class UsersDisplayComponent {
         console.log(error);
       }
     });
+  }
+
+  reloadPage() {
+    window.location.reload()
   }
 }
