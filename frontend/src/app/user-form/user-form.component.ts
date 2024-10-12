@@ -26,7 +26,6 @@ export class UserFormComponent {
   userList: User[] = [];
   userForm: FormGroup = new FormGroup({});  
 
-  isEdit = false;
   maxDate = new Date().toISOString().split('T')[0];
   dropdownOptions = ['M', 'F'];
 
@@ -35,22 +34,17 @@ export class UserFormComponent {
     this.route.queryParams.subscribe(params => {
       if (params['id'] != undefined && params['id'] != null && params['id'] !== '') {
         const id = params['id'];
-        this.isEdit = true;
         this.userService.getUser(id)
         .subscribe({
           next: (data) => {
-        if(data) {
-          this.userObj = data;
-          this.createForm();
-        }
+            if(data) {
+              this.userObj = data;
+              this.createForm();
+            }
           }, 
-          error: (error) => {
-          console.log(error);
-          }
+          error: (error) => { console.log(error); }
         });
-      } else {
-        this.onReset();
-      }
+      } else { this.onReset(); }
     });
   }
 
@@ -70,28 +64,23 @@ export class UserFormComponent {
     this.userObj = this.userForm.value;
     this.userService.createUser(this.userObj)
     .subscribe((res: any) => {
-      if(res.result) {
-        this.onReset();
-        console.log(this.userObj)
-        alert("User added successfully");
-      } else {
-        alert(res.message);
-      }
+      console.log(res);
+      // if(res.result) { } else { alert(res.message); }
     });
+    this.onReset();
+    alert("User added successfully");
   }
   
   onUpdate() {
     this.userObj = this.userForm.value;
     this.userService.updateUser(this.userObj)
     .subscribe((res: any) => {
-      if(res.result) {
-        this.onReset();
-        this.router.navigate(['UsersDisplay']);
-        //alert("User added successfully");
-      } else {
-        alert(res.message);
-      }
+      console.log(res);
+      // if(res.result) {} else { alert(res.message); }
     });
+    this.onReset();
+    alert("User added successfully");
+    this.router.navigate(['UsersDisplay']);
   }
 
   onReset() {
