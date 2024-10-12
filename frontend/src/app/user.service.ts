@@ -1,8 +1,10 @@
 import { Injectable, inject } from '@angular/core';
 
-import { User } from './user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
+
+import { User } from './user';
+import { Page } from './page';
 
 const httpOptions = {
   headers: new HttpHeaders({ 
@@ -21,8 +23,9 @@ export class UserService {
 
   http = inject(HttpClient);
 
-  getUsers()  {
-    return this.http.get<User[]>(this.apiUrl).pipe(catchError((this.handleError)));
+  getUsers(page: number, size: number) {
+    // .pipe(catchError((this.handleError)));
+    return this.http.get<Page<User>>(`${this.apiUrl}?page=${page}&size=${size}`);
   }
 
   getUser(id: number) {
@@ -43,6 +46,7 @@ export class UserService {
 
   private handleError (error: any) {
     console.log('server error:', error);
-    return throwError(() => new Error('server error'));
+    return throwError(() => new Error('Server Error'));
   };
+
 }

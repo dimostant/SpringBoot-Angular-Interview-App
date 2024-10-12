@@ -49,9 +49,9 @@ export class UsersDisplayComponent {
   }
 
   setArray(){
-    this.userService.getUsers().subscribe({
+    this.userService.getUsers(0, 5).subscribe({
       next: (data) => {
-        this.users = data;
+        this.users = data.content;
       },
       error: (error) => {
         console.log(error);
