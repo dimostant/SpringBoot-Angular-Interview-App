@@ -4,7 +4,7 @@ export class User {
         public  name:          string,
         public  surname:       string,
         public  gender:        string,
-        public  birthDate:     Date, 
+        public  birthDate:     string, 
         public  workAddress:   string,
         public  homeAddress:   string 
     ) {}
