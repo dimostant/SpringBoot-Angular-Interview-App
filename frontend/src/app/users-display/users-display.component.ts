@@ -26,8 +26,12 @@ export class UsersDisplayComponent {
   }
 
   onEdit(id: number | null) {
-    // if deleted entry
-    this.router.navigate(['UserForm'], { queryParams: { id: id } });
+    if (id != null && id != undefined) {
+      this.router.navigate(['UserForm'], { queryParams: { id: id } });
+    } 
+    else {
+      alert("This entry might be deleted or some internal error might have occured. Please try again later.");
+    }
   }
 
   onDelete(id: number | null) {
