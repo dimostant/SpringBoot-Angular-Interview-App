@@ -1,70 +1,72 @@
-<div class="col-4">
-  <div class="card">
-    <div class="card-header bg-success">
-      Register
-    </div>
-    <div class="card-body">
-      <form [formGroup]="userForm">
-        <div class="row">
-          <div class="col-6">
-            <label for="">Name</label>
-            <input type="text" formControlName="name" class="form-control">
-            <div class="text-danger">
-              @if(userForm.controls['name'].touched && userForm.controls['name'].errors?.['required']) {
-                <small class="text-danger">Name is required</small>
-                <!-- <span></span> -->
+<div class="d-flex justify-content-center align-items-center">
+  <div class="col-4">
+    <div class="card">
+      <div class="card-header bg-success">
+        Register
+      </div>
+      <div class="card-body">
+        <form [formGroup]="userForm">
+          <div class="row">
+            <div class="col-6">
+              <label for="">Name</label>
+              <input type="text" formControlName="name" class="form-control">
+              <div class="text-danger">
+                @if(userForm.controls['name'].touched && userForm.controls['name'].errors?.['required']) {
+                  <small class="text-danger">Name is required</small>
+                  <!-- <span></span> -->
+                }
+              </div>
+            </div>
+            <div class="col-6">
+              <label for="">Surname</label>
+              <input type="text" formControlName="surname" class="form-control">
+              <div class="text-danger">
+                @if(userForm.controls['surname'].touched && userForm.controls['surname'].errors?.['required']) {
+                  <small class="text-danger">Surname is required</small>
+                }
+              </div>
+            </div>
+            <div class="col-6">
+              <label for="">Gender</label>
+              <input type="text" formControlName="gender" class="form-control">
+            </div>
+            <div class="col-6">
+              <label for="">Date</label>
+              <input type="text" formControlName="birthDate" class="form-control"/>
+              <div class="text-danger">
+                @if(userForm.controls['birthDate'].touched && userForm.controls['birthDate'].errors?.['required']) {
+                  <small class="text-danger">Date is required</small>
+                }
+              </div>
+            </div>
+            <div class="col-12">
+              <label for="">Work Address</label>
+              <textarea formControlName="workAddress" class="form-control"></textarea>
+              <div class="text-danger">
+                @if(userForm.controls['workAddress'].touched && userForm.controls['workAddress'].errors?.['required']) {
+                  <small class="text-danger">Work Address is required</small>
+                }
+              </div>
+            </div>
+            <div class="col-12">
+              <label for="">Home Address</label>
+              <textarea formControlName="homeAddress" class="form-control"></textarea>
+            </div>
+          </div>
+          <div class="row  pt-2">
+            <div class="col-6 text-center">
+              <button class="btn btn-secondary" (click)="onReset()">Reset</button>
+            </div>
+            <div class="col-6 text-center">
+              @if(userForm.controls['id'].value == null) {
+                <button class="btn btn-success" [disabled]="userForm.invalid" (click)="onSave()">Register</button>
+              } @else {
+                <button class="btn btn-warning" (click)="onUpdate()">Update</button>
               }
             </div>
           </div>
-          <div class="col-6">
-            <label for="">Surname</label>
-            <input type="text" formControlName="surname" class="form-control">
-            <div class="text-danger">
-              @if(userForm.controls['surname'].touched && userForm.controls['surname'].errors?.['required']) {
-                <small class="text-danger">Surname is required</small>
-              }
-            </div>
-          </div>
-          <div class="col-6">
-            <label for="">Gender</label>
-            <input type="text" formControlName="gender" class="form-control">
-          </div>
-          <div class="col-6">
-            <label for="">Date</label>
-            <input type="text" formControlName="birthDate" class="form-control"/>
-            <div class="text-danger">
-              @if(userForm.controls['birthDate'].touched && userForm.controls['birthDate'].errors?.['required']) {
-                <small class="text-danger">Date is required</small>
-              }
-            </div>
-          </div>
-          <div class="col-12">
-            <label for="">Work Address</label>
-            <textarea formControlName="workAddress" class="form-control"></textarea>
-            <div class="text-danger">
-              @if(userForm.controls['workAddress'].touched && userForm.controls['workAddress'].errors?.['required']) {
-                <small class="text-danger">Work Address is required</small>
-              }
-            </div>
-          </div>
-          <div class="col-12">
-            <label for="">Home Address</label>
-            <textarea formControlName="homeAddress" class="form-control"></textarea>
-          </div>
-        </div>
-        <div class="row  pt-2">
-          <div class="col-6 text-center">
-            <button class="btn btn-secondary" (click)="onReset()">Reset</button>
-          </div>
-          <div class="col-6 text-center">
-            @if(userForm.controls['id'].value == null) {
-              <button class="btn btn-success" [disabled]="userForm.invalid" (click)="onSave()">Register</button>
-            } @else {
-              <button class="btn btn-warning" (click)="onUpdate()">Update</button>
-            }
-          </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
 </div>
