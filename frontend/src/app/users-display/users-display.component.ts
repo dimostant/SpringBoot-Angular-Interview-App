@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
   styleUrl: './users-display.component.scss'
 })
 export class UsersDisplayComponent {
-  postService = inject(UserService);
+  userService = inject(UserService);
   router = inject(Router);
 
   users: User[] = [];
@@ -31,7 +31,7 @@ export class UsersDisplayComponent {
 
   onDelete(id: number | null) {
     if (id != null) {
-      this.postService.deleteUser(id).subscribe((res: any) => {
+      this.userService.deleteUser(id).subscribe((res: any) => {
         if(res.result) {
           this.setArray(); //reset 
           alert("User deleted successfully");
@@ -43,7 +43,7 @@ export class UsersDisplayComponent {
   }
 
   setArray(){
-    this.postService.getUsers().subscribe({
+    this.userService.getUsers().subscribe({
       next: (data) => {
         this.users = data;
       },

@@ -19,7 +19,7 @@ import { CommonModule } from '@angular/common';
 })
 export class UserFormComponent {
 
-  postService = inject(UserService);
+  userService = inject(UserService);
   router = inject(Router);
 
   userObj: User = new User( null, '', '', 'M', '', '', '');
@@ -36,7 +36,7 @@ export class UserFormComponent {
       if (params['id'] != undefined && params['id'] != null && params['id'] !== '') {
         const id = params['id'];
         this.isEdit = true;
-        this.postService.getUser(id)
+        this.userService.getUser(id)
         .subscribe({
           next: (data) => {
         if(data) {
@@ -56,6 +56,7 @@ export class UserFormComponent {
 
   createForm() {
     this.userForm = new FormGroup({
+      id:           new FormControl(this.userObj.id),
       name:         new FormControl(this.userObj.name,         [Validators.required]),
       surname:      new FormControl(this.userObj.surname,      [Validators.required]),
       gender:       new FormControl(this.userObj.gender,       [Validators.required]),
@@ -67,7 +68,7 @@ export class UserFormComponent {
   
   onSave() {
     this.userObj = this.userForm.value;
-    this.postService.createUser(this.userObj)
+    this.userService.createUser(this.userObj)
     .subscribe((res: any) => {
       if(res.result) {
         this.onReset();
@@ -81,17 +82,16 @@ export class UserFormComponent {
   
   onUpdate() {
     this.userObj = this.userForm.value;
-    this.postService.updateUser(this.userObj)
+    this.userService.updateUser(this.userObj)
     .subscribe((res: any) => {
       if(res.result) {
         this.onReset();
-        alert("User added successfully");
+        this.router.navigate(['UsersDisplay']);
+        //alert("User added successfully");
       } else {
         alert(res.message);
       }
     });
-    this.onReset();
-    this.router.navigate(['UsersDisplay']);
   }
 
   onReset() {
