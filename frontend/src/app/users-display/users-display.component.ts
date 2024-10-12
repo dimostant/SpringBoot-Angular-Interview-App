@@ -6,7 +6,6 @@ import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 
 
-
 @Component({
   selector: 'app-users-display',
   standalone: true,
@@ -32,15 +31,14 @@ export class UsersDisplayComponent {
 
   onDelete(id: number | null) {
     if (id != null) {
-      this.postService.deleteUser(id).subscribe({
-        next: (data) => {
-          console.log(data);
-        },
-        error: (error) => {
-          console.log(error);
+      this.postService.deleteUser(id).subscribe((res: any) => {
+        if(res.result) {
+          this.setArray(); //reset 
+          alert("User deleted successfully");
+        } else {
+          alert(res.message);
         }
       });
-      this.setArray(); //reset 
     }
   }
 

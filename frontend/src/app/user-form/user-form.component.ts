@@ -3,9 +3,8 @@ import { Component, inject  } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { User } from '../user';
 import { UserService } from '../user.service';
-import { ActivatedRoute } from '@angular/router';
-
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router, ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
@@ -13,36 +12,39 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   standalone: true,
   imports: [
     ReactiveFormsModule,
+    CommonModule
   ],
   templateUrl: './user-form.component.html',
   styleUrl: './user-form.component.scss'
 })
 export class UserFormComponent {
 
-  userObj: User = new User( null, '', '', '', new Date(), '', '');
+  postService = inject(UserService);
+  router = inject(Router);
+
+  userObj: User = new User( null, '', '', '', '', '', '');
   userList: User[] = [];
   userForm: FormGroup = new FormGroup({});  
-  
-  postService = inject(UserService);
-  http = inject(HttpClient);
+
+  maxdate = new Date().toISOString().split('T')[0];
+  dropdownOptions = ['M', 'F'];
 
   constructor(private route: ActivatedRoute) {
     this.createForm();
     
     this.route.queryParams.subscribe(params => {
-      console.log(params);
-      if (params['id'] != undefined) {
+      if (params['id'] != undefined && params['id'] != null && params['id'] !== '') {
         const id = params['id'];
         this.postService.getUser(id)
         .subscribe({
           next: (data) => {
-            if(data) {
-              this.userObj = data;
-              this.createForm();
-            }
+        if(data) {
+          this.userObj = data;
+          this.createForm();
+        }
           }, 
           error: (error) => {
-              console.log(error);
+          console.log(error);
           }
         });
       } else {
@@ -64,10 +66,12 @@ export class UserFormComponent {
   }
   
   onSave() {
+    this.userObj = this.userForm.value;
     this.postService.createUser(this.userObj)
     .subscribe((res: any) => {
       if(res.result) {
         this.onReset();
+        console.log(this.userObj)
         alert("User added successfully");
       } else {
         alert(res.message);
@@ -76,23 +80,25 @@ export class UserFormComponent {
   }
   
   onUpdate() {
-    const record = this.userList.find((x) => x.id == this.userForm.controls['id'].value);
-    if (record != undefined) {
-      record.name        = this.userForm.controls['name'].value;
-      record.surname     = this.userForm.controls['surname'].value;
-      record.gender      = this.userForm.controls['gender'].value;
-      record.birthDate   = this.userForm.controls['birthDate'].value;
-      record.workAddress = this.userForm.controls['workAddress'].value;
-      record.homeAddress = this.userForm.controls['homeAddress'].value;
-    }
-    localStorage.setItem('userData', JSON.stringify(this.userList));
+    this.userObj = this.userForm.value;
+    this.postService.updateUser(this.userObj)
+    .subscribe((res: any) => {
+      if(res.result) {
+        this.onReset();
+        alert("User added successfully");
+      } else {
+        alert(res.message);
+      }
+    });
     this.onReset();
+    this.router.navigate(['UsersDisplay']);
   }
 
   onReset() {
-    this.userObj = new User( null, '', '', '', new Date(), '', '');
+    //this.userObj = new User( null, '', '', '', new Date(), '', '');
+    this.userObj  = new User( null, '', '', '', '', '', '');
+
     this.createForm();
   }
-
 
 }
