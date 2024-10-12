@@ -8,7 +8,7 @@
         <form [formGroup]="userForm">
           <div class="row">
             <div class="col-6">
-              <label for="">Name</label>
+              <label for="">Name*</label>
               <input type="text" formControlName="name" class="form-control">
               <div class="text-danger">
                 @if(userForm.controls['name'].touched && userForm.controls['name'].errors?.['required']) {
@@ -18,7 +18,7 @@
               </div>
             </div>
             <div class="col-6">
-              <label for="">Surname</label>
+              <label for="">Surname*</label>
               <input type="text" formControlName="surname" class="form-control">
               <div class="text-danger">
                 @if(userForm.controls['surname'].touched && userForm.controls['surname'].errors?.['required']) {
@@ -27,7 +27,7 @@
               </div>
             </div>
             <div class="col-6">
-              <label for="">Gender</label>
+              <label for="">Gender*</label>
               <select type="text" class="form-control" formControlName="gender" >
                 @for (option of dropdownOptions; track option) {
                   <option> {{option}} </option>
@@ -40,7 +40,7 @@
               </div>
             </div>
             <div class="col-6">
-              <label for="">Date</label>
+              <label for="">Date*</label>
               <input type="date" formControlName="birthDate" [max]="maxDate" class="form-control"/>
               <div class="text-danger">
                 @if(userForm.controls['birthDate'].touched && userForm.controls['birthDate'].errors?.['required']) {
