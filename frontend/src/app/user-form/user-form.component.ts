@@ -64,7 +64,7 @@ export class UserFormComponent {
     this.userObj = this.userForm.value;
     this.userService.createUser(this.userObj)
     .subscribe((res: any) => {
-      console.log(res);
+      //console.log(res);
       // if(res.result) { } else { alert(res.message); }
     });
     this.onReset();
@@ -75,7 +75,7 @@ export class UserFormComponent {
     this.userObj = this.userForm.value;
     this.userService.updateUser(this.userObj)
     .subscribe((res: any) => {
-      console.log(res);
+      //console.log(res);
       // if(res.result) {} else { alert(res.message); }
     });
     this.onReset();

@@ -26,20 +26,22 @@ export class UsersDisplayComponent {
   }
 
   onEdit(id: number | null) {
+    // if deleted entry
     this.router.navigate(['UserForm'], { queryParams: { id: id } });
   }
 
   onDelete(id: number | null) {
     if (id != null) {
       this.userService.deleteUser(id).subscribe((res: any) => {
-        if(res.result) {
-          this.setArray(); //reset 
-          alert("User deleted successfully");
-        } else {
-          alert(res.message);
-        }
+      //   if(res.result) {
+      //     this.setArray(); //reset 
+      //     alert("User deleted successfully");
+      //   } else { alert(res.message); }
       });
     }
+    alert("User deleted successfully");
+    this.setArray();
+    window.location.reload()
   }
 
   setArray(){
