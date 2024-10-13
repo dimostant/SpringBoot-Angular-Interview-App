@@ -1,1 +1,47 @@
-<p>user-display works!</p>
+
+<div class="d-flex justify-content-center align-items-center">
+    <div class="col-8">
+      <div class="card">
+        <div class="card-header bg-success">
+          <h3> User </h3>
+        </div>
+          <div class="card-body">
+          @if (user) { 
+          <div class="row">
+              <div class="col-12">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Surname</th>
+                      <th>Gender</th>
+                      <th>Birth Date</th>
+                      <th>Work Address</th>
+                      <th>Home Address</th>
+                      <th class="text-center">Controls</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                        <td> {{user.name}}</td>
+                        <td> {{user.surname}}</td>
+                        <td> {{user.gender}}</td>
+                        <td> {{user.birthDate}}</td>
+                        <td> {{user.workAddress}}</td>
+                        <td> {{user.homeAddress}}</td>
+                        <td class="text-center">
+                            <button class="btn btn-primary mx-2" (click)="onEdit(user.id)">Edit</button>
+                            <button class="btn btn-danger" (click)="onDelete(user.id)">Delete</button>          
+                        </td>
+                      </tr>
+                  </tbody>
+                 </table>
+              </div>
+          </div>
+          } @else {
+              <p>No user found</p>   
+          } 
+        </div>
+      </div>
+    </div>
+  </div>

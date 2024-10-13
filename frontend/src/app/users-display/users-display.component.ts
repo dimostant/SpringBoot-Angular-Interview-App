@@ -71,8 +71,8 @@ export class UsersDisplayComponent {
     this.setArray();
   }
 
-  toUserDisplay() {
-    this.router.navigate(['UserDisplay']);
+  onView(id: number | null) {
+    this.router.navigate(['UserDisplay'],{ queryParams: { id: id } });
   }
 
   reloadPage() {
