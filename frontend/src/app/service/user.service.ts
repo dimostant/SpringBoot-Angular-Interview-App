@@ -3,8 +3,8 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
 
-import { User } from './user';
-import { Page } from './page';
+import { User } from '../class/user';
+import { Page } from '../interface/page';
 
 const httpOptions = {
   headers: new HttpHeaders({ 

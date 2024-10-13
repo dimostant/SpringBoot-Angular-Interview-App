@@ -5,7 +5,6 @@ export class User {
         public  surname:       string,
         public  gender:        string,
         public  birthDate:     string, 
-        public  workAddress:   string,
-        public  homeAddress:   string 
+        public  addresses:     string[],
     ) {}
 }
