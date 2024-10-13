@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   selector: 'app-users-display',
   standalone: true,
   imports: [
-    CommonModule, //common module?
+    CommonModule,
   ],
   templateUrl: './users-display.component.html',
   styleUrl: './users-display.component.scss'
@@ -45,7 +45,6 @@ export class UsersDisplayComponent {
         next: () => {
           alert("User deleted successfully");
           this.setArray();
-          this.reloadPage();
         },
         error: (error) => { console.log(error); }
       });

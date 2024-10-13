@@ -50,8 +50,7 @@ export class UserDisplayComponent {
       this.userService.deleteUser(id).subscribe({
         next: () => {
           alert("User deleted successfully");
-          this.setUser();
-          this.reloadPage();
+          this.router.navigate(['UsersDisplay']);
         },
         error: (error) => {  console.log(error); },
     });

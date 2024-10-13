@@ -7,6 +7,8 @@ export class User {
         public  surname:       string,
         public  gender:        string,
         public  birthDate:     string, 
-        public  address:       Address,
+        //public  address:       Address,
+        public workAddress:   string,
+        public homeAddress:   string,
     ) {}
 }

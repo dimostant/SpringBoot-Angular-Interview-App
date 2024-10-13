@@ -4,5 +4,4 @@ export class Address {
         public workAddress: string,
         public homeAddress: string,
     ) {}
-
   }

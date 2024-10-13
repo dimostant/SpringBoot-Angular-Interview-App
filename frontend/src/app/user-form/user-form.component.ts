@@ -23,7 +23,7 @@ export class UserFormComponent {
   userService = inject(UserService);
   router = inject(Router);
 
-  userObj: User = new User( null, '', '', 'M', '', new Address(null, '', ''));
+  userObj: User = new User( null, '', '', 'M', '', '', '');
   userList: User[] = [];
   userForm: FormGroup = new FormGroup({});  
 
@@ -56,11 +56,15 @@ export class UserFormComponent {
       surname:      new FormControl(this.userObj.surname,      [Validators.required]),
       gender:       new FormControl(this.userObj.gender,       [Validators.required]),
       birthDate:    new FormControl(this.userObj.birthDate,    [Validators.required]),
-      address:      new FormGroup  ({
-          id:           new FormControl(this.userObj.address.id),
-          workAddress:  new FormControl(this.userObj.address.workAddress),
-          homeAddress:  new FormControl(this.userObj.address.homeAddress),
-      }),
+      workAddress:      new FormControl(this.userObj.workAddress),
+      homeAddress:      new FormControl(this.userObj.homeAddress),
+
+        //{
+      // address:      new FormGroup  ({
+      //     id:           new FormControl(this.userObj.address.id),
+      //     workAddress:  new FormControl(this.userObj.address.workAddress),
+      //     homeAddress:  new FormControl(this.userObj.address.homeAddress),
+      // }),
     });
   }
     
@@ -90,7 +94,7 @@ export class UserFormComponent {
   }
 
   onReset() {
-    this.userObj  = new User( null, '', '', 'M', '', new Address(null, '', ''));
+    this.userObj  = new User( null, '', '', 'M', '', '', '');
     this.createForm();
   }
 
