@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
-@EntityScan("com.eu.app.rest.entities")
+@EntityScan("com.eu.app.rest.entity")
 public class ApiApplication {
 
     public static void main(String[] args) {

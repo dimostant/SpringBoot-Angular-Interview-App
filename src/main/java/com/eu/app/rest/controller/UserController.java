@@ -1,8 +1,10 @@
-package com.eu.app.rest.controllers;
+package com.eu.app.rest.controller;
 
-import com.eu.app.rest.entities.User;
-import com.eu.app.rest.services.UserService;
-import lombok.RequiredArgsConstructor;
+import com.eu.app.rest.dto.UserDTO;
+import com.eu.app.rest.entity.User;
+import com.eu.app.rest.service.UserService;
+import lombok.AllArgsConstructor;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
-@RequiredArgsConstructor
+@AllArgsConstructor
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
     private final UserService userService;
@@ -23,7 +25,7 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public Page<User> getAllUsers(
+    public Page<UserDTO> getAllUsers(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size) {
         Pageable pageable = PageRequest.of(page, size);
@@ -40,18 +42,11 @@ public class UserController {
     }
 
     @PutMapping("/users/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user){
-        User existingUser = userService.getUserById(id);
-        if (existingUser == null) {
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User newUser){
+        User updatedUser = userService.updateUser(id, newUser);
+        if (updatedUser == null) {
             return ResponseEntity.notFound().build();
         }
-        existingUser.setName(user.getName());
-        existingUser.setSurname(user.getSurname());
-        existingUser.setGender(user.getGender());
-        existingUser.setBirthDate(user.getBirthDate());
-        existingUser.setWorkAddress(user.getWorkAddress());
-        existingUser.setHomeAddress(user.getHomeAddress());
-        User updatedUser = userService.updateUser(existingUser);
         return ResponseEntity.ok(updatedUser);
     }
 

@@ -1,4 +1,4 @@
-package com.eu.app.rest.entities;
+package com.eu.app.rest.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
@@ -9,7 +9,6 @@ import java.sql.Date;
 @Data
 @Entity
 @Table(name = "user")
-
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
