@@ -27,8 +27,8 @@
                         <td> {{user.surname}}</td>
                         <td> {{user.gender}}</td>
                         <td> {{user.birthDate}}</td>
-                        <td> {{user.workAddress}}</td>
-                        <td> {{user.homeAddress}}</td>
+                        <td> {{user.address.workAddress}}</td>
+                        <td> {{user.address.homeAddress}}</td>
                         <td class="text-center">
                             <button class="btn btn-primary mx-2" (click)="onEdit(user.id)">Edit</button>
                             <button class="btn btn-danger" (click)="onDelete(user.id)">Delete</button>          

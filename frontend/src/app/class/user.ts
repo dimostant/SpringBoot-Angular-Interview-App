@@ -1,3 +1,5 @@
+import { Address } from './address';
+
 export class User {
     constructor(
         public  id:            number | null,
@@ -5,6 +7,6 @@ export class User {
         public  surname:       string,
         public  gender:        string,
         public  birthDate:     string, 
-        public  addresses:     string[],
+        public  address:       Address,
     ) {}
 }

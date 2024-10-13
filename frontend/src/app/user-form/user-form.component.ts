@@ -4,8 +4,9 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
-import { User } from '../user';
-import { UserService } from '../user.service';
+import { User } from '../class/user';
+import { UserService } from '../service/user.service';
+import { Address } from '../class/address';
 
 @Component({
   selector: 'app-user-form',
@@ -22,7 +23,7 @@ export class UserFormComponent {
   userService = inject(UserService);
   router = inject(Router);
 
-  userObj: User = new User( null, '', '', 'M', '', '', '');
+  userObj: User = new User( null, '', '', 'M', '', new Address(null, '', ''));
   userList: User[] = [];
   userForm: FormGroup = new FormGroup({});  
 
@@ -55,36 +56,41 @@ export class UserFormComponent {
       surname:      new FormControl(this.userObj.surname,      [Validators.required]),
       gender:       new FormControl(this.userObj.gender,       [Validators.required]),
       birthDate:    new FormControl(this.userObj.birthDate,    [Validators.required]),
-      workAddress:  new FormControl(this.userObj.workAddress),
-      homeAddress:  new FormControl(this.userObj.homeAddress)
+      address:      new FormGroup  ({
+          id:           new FormControl(this.userObj.address.id),
+          workAddress:  new FormControl(this.userObj.address.workAddress),
+          homeAddress:  new FormControl(this.userObj.address.homeAddress),
+      }),
     });
   }
-  
+    
   onSave() {
     this.userObj = this.userForm.value;
     this.userService.createUser(this.userObj)
-    .subscribe((res: any) => {
-      //console.log(res);
-      // if(res.result) { } else { alert(res.message); }
+    .subscribe({
+      next: () => {
+        this.onReset();
+        alert("User added successfully");
+      },
+      error: (error) => { console.log(error); }
     });
-    this.onReset();
-    alert("User added successfully");
   }
   
   onUpdate() {
     this.userObj = this.userForm.value;
     this.userService.updateUser(this.userObj)
-    .subscribe((res: any) => {
-      //console.log(res);
-      // if(res.result) {} else { alert(res.message); }
+    .subscribe({
+      next: () => {
+        this.onReset();
+        alert("User added successfully");
+        this.router.navigate(['UsersDisplay']);
+      },
+      error: (error) => { console.log(error); }
     });
-    this.onReset();
-    alert("User added successfully");
-    this.router.navigate(['UsersDisplay']);
   }
 
   onReset() {
-    this.userObj  = new User( null, '', '', 'M', '', '', '');
+    this.userObj  = new User( null, '', '', 'M', '', new Address(null, '', ''));
     this.createForm();
   }
 

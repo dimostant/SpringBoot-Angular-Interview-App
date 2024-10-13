@@ -41,16 +41,15 @@ export class UsersDisplayComponent {
 
   onDelete(id: number | null) {
     if (id != null) {
-      this.userService.deleteUser(id).subscribe((res: any) => {
-      //   if(res.result) {
-      //     this.setArray(); //reset 
-      //     alert("User deleted successfully");
-      //   } else { alert(res.message); }
+      this.userService.deleteUser(id).subscribe({
+        next: () => {
+          alert("User deleted successfully");
+          this.setArray();
+          this.reloadPage();
+        },
+        error: (error) => { console.log(error); }
       });
     }
-    alert("User deleted successfully");
-    this.setArray();
-    this.reloadPage();
   }
 
   setArray(){
@@ -60,9 +59,7 @@ export class UsersDisplayComponent {
         this.totalElements = data.totalElements;
         this.totalPages = data.totalPages;
       },
-      error: (error) => {
-        console.log(error);
-      }
+      error: (error) => { console.log(error); }
     });
   }
 
