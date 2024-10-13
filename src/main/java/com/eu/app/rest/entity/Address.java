@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "addresses")
+@Table(name = "address")
 
 public class Address {
     @Id
@@ -15,7 +15,6 @@ public class Address {
     private String workAddress;
     private String homeAddress;
 
-    @OneToOne
-    @JoinColumn(name = "user_id") // This will create a foreign key reference to the user
+    @OneToOne(mappedBy = "address")
     private User user;
 }
