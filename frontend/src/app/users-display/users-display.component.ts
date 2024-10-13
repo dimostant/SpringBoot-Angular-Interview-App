@@ -71,6 +71,10 @@ export class UsersDisplayComponent {
     this.setArray();
   }
 
+  toUserDisplay() {
+    this.router.navigate(['UserDisplay']);
+  }
+
   reloadPage() {
     window.location.reload()
   }

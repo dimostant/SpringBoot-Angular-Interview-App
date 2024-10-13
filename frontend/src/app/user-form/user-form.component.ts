@@ -80,6 +80,7 @@ export class UserFormComponent {
     });
     this.onReset();
     alert("User added successfully");
+    this.router.navigate(['UsersDisplay']);
   }
 
   onReset() {
