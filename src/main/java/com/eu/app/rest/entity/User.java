@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Date;
-import java.util.List;
 
 @Data
 @Entity
@@ -22,6 +21,6 @@ public class User {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private Date birthDate;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Addresses> addresses;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Address address;
 }

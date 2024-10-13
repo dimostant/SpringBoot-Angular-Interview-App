@@ -7,7 +7,7 @@ import lombok.Data;
 @Entity
 @Table(name = "addresses")
 
-public class Addresses {
+public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -15,7 +15,7 @@ public class Addresses {
     private String workAddress;
     private String homeAddress;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @OneToOne
+    @JoinColumn(name = "user_id") // This will create a foreign key reference to the user
     private User user;
 }
