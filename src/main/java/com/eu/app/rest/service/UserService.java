@@ -36,8 +36,7 @@ public class UserService {
         existingUser.setSurname(newUser.getSurname());
         existingUser.setGender(newUser.getGender());
         existingUser.setBirthDate(newUser.getBirthDate());
-        existingUser.setWorkAddress(newUser.getWorkAddress());
-        existingUser.setHomeAddress(newUser.getHomeAddress());
+        existingUser.setAddresses(newUser.getAddresses());
         return userRepository.save(existingUser);
     }
 
