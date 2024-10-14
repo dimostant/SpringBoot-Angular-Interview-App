@@ -1,15 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { User } from '../class/user';
 import { Page } from '../interface/page';
-
-// const httpOptions = {
-//   headers: new HttpHeaders({ 
-//     'Content-Type': 'application/json'
-//    })
-// };
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +25,7 @@ export class UserService {
   }
 
   createUser(user: User) {
-    return this.http.post<User>(this.apiUrl, user, /*httpOptions*/);
+    return this.http.post<User>(this.apiUrl, user);
   }
 
   updateUser(user: User) {
