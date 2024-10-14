@@ -27,11 +27,14 @@ export class UserFormComponent {
   maxDate = new Date().toISOString().split('T')[0];
   dropdownOptions = ['M', 'F'];
 
+  editId: number | null = null;
+
   constructor(private route: ActivatedRoute) {
     this.createForm();
     this.route.queryParams.subscribe(params => {
       if (params['id'] != undefined && params['id'] != null && params['id'] !== '') {
         const id = params['id'];
+        this.editId = id;
         this.userService.getUser(id)
         .subscribe({
           next: (data) => {
@@ -84,7 +87,7 @@ export class UserFormComponent {
   }
 
   onReset() {
-    this.userObj  = new User( null, '', '', 'M', '', '', '');
+    this.userObj  = new User( (this.editId != null ? this.editId : null) , '', '', 'M', '', '', '');
     this.createForm();
   }
 
