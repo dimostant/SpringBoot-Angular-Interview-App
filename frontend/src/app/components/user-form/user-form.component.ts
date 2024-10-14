@@ -4,9 +4,9 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
-import { User } from '../class/user';
-import { UserService } from '../service/user.service';
-import { Address } from '../class/address';
+import { User } from '../../class/user';
+import { UserService } from '../../service/user.service';
+import { Address } from '../../class/address';
 
 @Component({
   selector: 'app-user-form',

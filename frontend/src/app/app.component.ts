@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { User } from './class/user';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +15,7 @@ import { User } from './class/user';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  
+
   title = 'EDfrontend';
 
 }
