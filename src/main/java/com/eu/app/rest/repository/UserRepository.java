@@ -13,7 +13,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT new com.eu.app.rest.dto.UserGridDTO(u.id, u.name, u.surname) FROM User u")
     Page<UserGridDTO> findAllUsersWithLimitedFields(Pageable pageable);
 
-    @Query("SELECT new com.eu.app.rest.dto.UserDTO(u.id, u.name, u.surname, u.gender, u.birthDate, u.address.homeAddress, u.address.workAddress) FROM User u WHERE u.id = :id")
+    @Query("SELECT new com.eu.app.rest.dto.UserDTO(u.id, u.name, u.surname, u.gender, u.birthDate, u.address.workAddress, u.address.homeAddress ) FROM User u WHERE u.id = :id")
     UserDTO getUserById(Long id);
 
 }

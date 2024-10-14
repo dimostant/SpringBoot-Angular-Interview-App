@@ -27,7 +27,6 @@ public class UserService {
         address.setWorkAddress(userDto.getWorkAddress());
         address.setHomeAddress(userDto.getHomeAddress());
         user.setAddress(address);
-
         return userRepository.save(user);
     }
 

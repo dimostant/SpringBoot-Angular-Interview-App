@@ -74,7 +74,7 @@ export class UserFormComponent {
   }
   
   onUpdate() {
-    this.userObj = this.userForm.value;
+    this.userObj = this.userForm.value; 
     this.userService.updateUser(this.userObj)
     .subscribe({
       next: () => {
