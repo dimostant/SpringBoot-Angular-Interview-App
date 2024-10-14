@@ -5,7 +5,7 @@
         <div class="card-header bg-success">
           <h3> User </h3>
         </div>
-          <div class="card-body">
+        <div class="card-body">
           @if (user) { 
           <div class="row">
               <div class="col-12">
@@ -29,8 +29,6 @@
                         <td> {{user.birthDate}}</td>
                         <td> {{user.workAddress}}</td>
                         <td> {{user.homeAddress}}</td>
-                        <!-- <td> {{user.address.workAddress}}</td>
-                        <td> {{user.address.homeAddress}}</td> -->
                         <td class="text-center">
                             <button class="btn btn-primary mx-2" (click)="onEdit(user.id)">Edit</button>
                             <button class="btn btn-danger" (click)="onDelete(user.id)">Delete</button>          

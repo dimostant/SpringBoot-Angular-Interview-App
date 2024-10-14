@@ -1,6 +1,5 @@
 import { Component, inject  } from '@angular/core';
 
-import { CommonModule } from '@angular/common';
 import { User } from '../../class/user';
 import { UserService } from '../../service/user.service';
 import { Router } from '@angular/router';
@@ -9,9 +8,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-users-display',
   standalone: true,
-  imports: [
-    CommonModule,
-  ],
+  imports: [],
   templateUrl: './users-display.component.html',
   styleUrl: './users-display.component.scss'
 })

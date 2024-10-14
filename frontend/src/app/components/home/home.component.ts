@@ -4,7 +4,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   selector: 'app-home',
   standalone: true,
   imports: [
-    RouterOutlet,//?
+    RouterOutlet,
     RouterLink, 
     RouterLinkActive 
   ],

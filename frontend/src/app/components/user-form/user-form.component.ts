@@ -2,18 +2,15 @@ import { Component, inject  } from '@angular/core';
 
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CommonModule } from '@angular/common';
 
 import { User } from '../../class/user';
 import { UserService } from '../../service/user.service';
-import { Address } from '../../class/address';
 
 @Component({
   selector: 'app-user-form',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    CommonModule
   ],
   templateUrl: './user-form.component.html',
   styleUrl: './user-form.component.scss'
@@ -56,15 +53,8 @@ export class UserFormComponent {
       surname:      new FormControl(this.userObj.surname,      [Validators.required]),
       gender:       new FormControl(this.userObj.gender,       [Validators.required]),
       birthDate:    new FormControl(this.userObj.birthDate,    [Validators.required]),
-      workAddress:      new FormControl(this.userObj.workAddress),
-      homeAddress:      new FormControl(this.userObj.homeAddress),
-
-        //{
-      // address:      new FormGroup  ({
-      //     id:           new FormControl(this.userObj.address.id),
-      //     workAddress:  new FormControl(this.userObj.address.workAddress),
-      //     homeAddress:  new FormControl(this.userObj.address.homeAddress),
-      // }),
+      workAddress:  new FormControl(this.userObj.workAddress),
+      homeAddress:  new FormControl(this.userObj.homeAddress),
     });
   }
     
