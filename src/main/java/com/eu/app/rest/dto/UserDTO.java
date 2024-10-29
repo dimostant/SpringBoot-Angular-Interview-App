@@ -8,7 +8,6 @@ import java.sql.Date;
 
 @Data
 @AllArgsConstructor
-
 public class UserDTO {
     private Long id;
 

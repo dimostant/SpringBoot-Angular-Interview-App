@@ -23,10 +23,12 @@ public class UserService {
         user.setSurname(userDto.getSurname());
         user.setGender(userDto.getGender());
         user.setBirthDate(userDto.getBirthDate());
+
         Address address = new Address();
         address.setWorkAddress(userDto.getWorkAddress());
         address.setHomeAddress(userDto.getHomeAddress());
         user.setAddress(address);
+
         return userRepository.save(user);
     }
 
@@ -49,6 +51,7 @@ public class UserService {
         existingUser.setBirthDate(newUser.getBirthDate());
         existingUser.getAddress().setWorkAddress(newUser.getWorkAddress());
         existingUser.getAddress().setHomeAddress(newUser.getHomeAddress());
+
         return userRepository.save(existingUser);
     }
 
