@@ -21,7 +21,6 @@ export class UserFormComponent {
   router = inject(Router);
 
   userObj: User = new User( null, '', '', 'M', '', '', '');
-  userList: User[] = [];
   userForm: FormGroup = new FormGroup({});  
 
   maxDate = new Date().toISOString().split('T')[0];
